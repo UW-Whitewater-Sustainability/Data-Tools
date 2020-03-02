@@ -19,6 +19,7 @@
 ##              Implemented parsing function to turn the temp CSV file into Month objects
 ##              Implemented a Parser class that is used to manipulate and output the data
 ##              Implemented a toCSV function that turns the data held in the Parser object into an array of CSV lines
+##  03/02/2020: Fixed issue where missing data was stored as 999.9, throwing off calculations. Is now represented by an empty string
 ## TODO: Finish Documentation
 
 ######################################## Imports #########################################################################################################################################################
@@ -131,7 +132,7 @@ class Parser:
                 ## Parse TMAX
                 if(len(M.TMAX) > 0):
                     d_TMAX = M.TMAX[D].split('|')
-                    v_TMAX = str((float(d_TMAX[0])/10))
+                    v_TMAX = str((float(d_TMAX[0])/10)) if ((float(d_TMAX[0])/10) < 999) and ((float(d_TMAX[0])/10) > -999) else ""
                     m_TMAX = str(d_TMAX[1])
                     q_TMAX = str(d_TMAX[2])
                     s_TMAX = str(d_TMAX[3])
@@ -139,7 +140,7 @@ class Parser:
                 ## Parse TMIN
                 if(len(M.TMIN) > 0):
                     d_TMIN = M.TMIN[D].split('|')
-                    v_TMIN = str((float(d_TMIN[0])/10))
+                    v_TMIN = str((float(d_TMIN[0])/10)) if ((float(d_TMIN[0])/10) < 999) and ((float(d_TMIN[0])/10) > -999) else ""
                     m_TMIN = str(d_TMIN[1])
                     q_TMIN = str(d_TMIN[2])
                     s_TMIN = str(d_TMIN[3])
@@ -147,7 +148,7 @@ class Parser:
                 ## Parse TOBS
                 if(len(M.TOBS) > 0):
                     d_TOBS = M.TOBS[D].split('|')
-                    v_TOBS = str((float(d_TOBS[0])/10))
+                    v_TOBS = str((float(d_TOBS[0])/10)) if ((float(d_TOBS[0])/10) < 999) and ((float(d_TOBS[0])/10) > -999) else ""
                     m_TOBS = str(d_TOBS[1])
                     q_TOBS = str(d_TOBS[2])
                     s_TOBS = str(d_TOBS[3])
@@ -155,7 +156,7 @@ class Parser:
                 ## Parse PRCP
                 if(len(M.PRCP) > 0):
                     d_PRCP = M.PRCP[D].split('|')
-                    v_PRCP = str((float(d_PRCP[0])/10))
+                    v_PRCP = str((float(d_PRCP[0])/10)) if ((float(d_PRCP[0])/10) < 999) and ((float(d_PRCP[0])/10) > -999) else ""
                     m_PRCP = str(d_PRCP[1])
                     q_PRCP = str(d_PRCP[2])
                     s_PRCP = str(d_PRCP[3])
@@ -163,7 +164,7 @@ class Parser:
                 ## Parse SNOW
                 if(len(M.SNOW) > 0):
                     d_SNOW = M.SNOW[D].split('|')
-                    v_SNOW = str(d_SNOW[0])
+                    v_SNOW = str(d_SNOW[0]) if (float(d_SNOW[0]) < 999) and (float(d_SNOW[0]) > -999) else ""
                     m_SNOW = str(d_SNOW[1])
                     q_SNOW = str(d_SNOW[2])
                     s_SNOW = str(d_SNOW[3])
@@ -171,7 +172,7 @@ class Parser:
                 ## Parse SNWD
                 if(len(M.SNWD) > 0):
                     d_SNWD = M.SNWD[D].split('|')
-                    v_SNWD = str(d_SNWD[0])
+                    v_SNWD = str(d_SNWD[0]) if (float(d_SNWD[0]) < 999) and (float(d_SNWD[0]) > -999) else ""
                     m_SNWD = str(d_SNWD[1])
                     q_SNWD = str(d_SNWD[2])
                     s_SNWD = str(d_SNWD[3])
